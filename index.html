@@ -1,1 +1,1236 @@
-<h1>Conexion-estudiantil</h1>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexión Estudiantil - ENMS Guanajuato</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #253b80;
+            --secondary-color: #ffcc00;
+            --accent-color: #4682B4;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 0;  /* Añade padding derecho */
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-container {
+            background-color: var(--secondary-color);
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            background-color: #ffd700;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;  /* Alinea verticalmente los elementos */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .signin-btn {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-right: 20px;
+        }
+        
+        .signin-btn:hover {
+            background-color: #ffd700;
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            height: 85vh;
+            background-color: var(--primary-color);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            width: 50%;
+            padding: 50px;
+            color: var(--text-light);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .hero-subtitle {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+        
+        .hero-image {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 1.4s;
+        }
+        
+        .hero-image img {
+            max-width: 90%;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .background-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: 10%;
+            animation: moveShape 20s linear infinite;
+        }
+        
+        .shape2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: 20%;
+            animation: moveShape 15s linear infinite reverse;
+        }
+        
+        .shape3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            left: 30%;
+            animation: moveShape 18s linear infinite;
+        }
+        
+        .about-section {
+            padding: 80px 50px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .about-text {
+            flex-basis: 60%;
+            padding-right: 30px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .about-features {
+            flex-basis: 35%;
+            background-color: #f4f4f4;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-item {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .feature-item:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .services-section {
+            padding: 80px 50px;
+            background-color: #f9f9f9;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+        
+        .services-cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            flex-basis: calc(33.333% - 20px);
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            padding: 60px 50px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .cta-btn {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .cta-btn:hover {
+            background-color: #ffd700;
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background-color: #222;
+            color: #fff;
+            padding: 50px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex-basis: 30%;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .search-icon {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes moveShape {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(10%, 10%) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 20%) rotate(180deg);
+            }
+            75% {
+                transform: translate(-10%, 10%) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .hero-content, .hero-image {
+                width: 100%;
+                padding: 30px;
+            }
+            
+
+    .about-text p strong {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    .testimonials-section {
+        padding: 80px 50px;
+        text-align: center;
+        background-color: #f4f4f4;
+        opacity: 0; 
+        transform: translateY(20px);
+        transition: all 1s ease;
+    }
+    
+    .testimonials-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    
+    .testimonial-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        margin: 15px;
+        max-width: 350px;
+        text-align: left;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-size: 4rem;
+        color: var(--secondary-color);
+        opacity: 0.2;
+        line-height: 1;
+    }
+    
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        color: #555;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .testimonial-author {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    .testimonial-role {
+        color: #777;
+        font-size: 0.9rem;
+    }
+    
+    .features-section {
+        padding: 80px 50px;
+        background-color: #fff;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .feature-box {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .feature-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-box::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: var(--secondary-color);
+        opacity: 0.1;
+        z-index: -1;
+    }
+    
+    .feature-icon {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+    
+    .feature-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+    }
+    
+    .feature-description {
+        color: #666;
+        line-height: 1.6;
+    }
+    
+    .stats-section {
+        padding: 60px 50px;
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+    }
+    
+    .stats-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+    
+    .stat-item {
+        text-align: center;
+        margin: 20px;
+        min-width: 200px;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+    }
+    
+    .stat-label {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    
+    .contact-form {
+        margin-top: 30px;
+        max-width: 600px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #444;
+        font-weight: 500;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .form-input:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 5px rgba(70, 130, 180, 0.3);
+        outline: none;
+    }
+    
+    .form-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        min-height: 150px;
+        resize: vertical;
+        transition: all 0.3s ease;
+    }
+    
+    .form-textarea:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 5px rgba(70, 130, 180, 0.3);
+        outline: none;
+    }
+    
+    .submit-btn {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+        background-color: #1a2e6c;
+        transform: translateY(-3px);
+    }
+    
+    .mobile-menu {
+    display: none !important; /* Oculto por defecto en escritorio */
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 20px;
+    color: var(--text-light);
+}
+    
+    @media screen and (max-width: 768px) {
+        .mobile-menu {
+            display: block !important; 
+        }
+        .nav-links.active .close-menu {
+            display: block;
+        
+}
+        .nav-links {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--primary-color);
+            flex-direction: column;
+            padding: 80px 0;
+            transition: right 0.3s ease;
+            z-index: 99;
+            margin: 0;
+        }
+        
+        .nav-links.active {
+            right: 0;
+        }
+        
+        .nav-links li {
+            margin: 20px 0;
+        }
+        
+        .close-menu {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+        .hero-title {
+            font-size: 2.2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+        }
+        
+        .about-content, .footer-content {
+            flex-direction: column;
+        }
+        
+        .about-text, .about-features, .footer-section {
+            flex-basis: 100%;
+            padding-right: 0;
+            margin-bottom: 30px;
+        }
+        
+        .service-card {
+            flex-basis: 100%;
+        }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo">CONEXIÓN ESTUDIANTIL</div>
+        </div>
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <div class="close-menu">
+                <i class="fas fa-times"></i>
+            </div>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#sobre">Sobre Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#profesores">Profesores</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <button class="signin-btn">Iniciar Sesión</button>
+        </ul>
+    </nav>
+    
+    <section class="hero" id="inicio">
+        <div class="background-shapes">
+            <div class="shape shape1"></div>
+            <div class="shape shape2"></div>
+            <div class="shape shape3"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Bienvenido a Conexión Estudiantil</h1>
+            <h2 class="hero-subtitle">Tu guía para la ENMS Guanajuato</h2>
+            <p class="hero-description">
+                Facilitamos tu integración como estudiante de primer año con recursos, reseñas de profesores y herramientas para mejorar tu experiencia educativa.
+            </p>
+            <button class="cta-btn">Explora Ahora</button>
+        </div>
+        <div class="hero-image">
+            <img src="img/Logo-morado.jpeg" alt="Estudiantes colaborando">
+        </div>
+            <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="about-section" id="sobre">
+        <h2 class="section-title">Sobre Conexión Estudiantil</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    <strong>Conexión Estudiantil</strong> es una plataforma diseñada para ayudar a los estudiantes de primer año de la ENMS Guanajuato a integrarse de manera más sencilla y efectiva a la vida académica.
+                </p>
+                <p>
+                    Nuestro objetivo es proporcionarte todos los recursos, información y herramientas que necesitas para tener una experiencia educativa exitosa, desde reseñas honestas de profesores hasta guías para trámites administrativos.
+                </p>
+                <p>
+                    Desarrollada por estudiantes para estudiantes, entendemos los desafíos que enfrentas y buscamos facilitarte el camino con información centralizada, confiable y fácil de acceder.
+                </p>
+            </div>
+            <div class="about-features">
+                <h3>¿Por qué elegirnos?</h3>
+                <ul class="feature-list">
+                    <li class="feature-item">Información centralizada y accesible</li>
+                    <li class="feature-item">Reseñas sinceras de profesores</li>
+                    <li class="feature-item">Guías para trámites escolares</li>
+                    <li class="feature-item">Creación de grupos de estudio</li>
+                    <li class="feature-item">Consejos para mejorar tu rendimiento</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="servicios">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-cards">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="service-title">Reseñas</h3>
+                <p class="service-description">
+                    Conoce experiencias reales de otros estudiantes con los profesores, sus métodos de enseñanza y sistemas de evaluación.
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3 class="service-title">Recursos Académicos</h3>
+                <p class="service-description">
+                    Accede a materiales de estudio, consejos y estrategias para mejorar tu rendimiento académico.
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="service-title">Grupos de Estudio</h3>
+                <p class="service-description">
+                    Forma parte de grupos de estudio para cursos regulares o vacacionales y aprende de manera colaborativa.
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h3 class="service-title">Trámites Escolares</h3>
+                <p class="service-description">
+                    Información detallada sobre procesos administrativos, inscripciones, servicio social y becas.
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="service-title">Avisos Importantes</h3>
+                <p class="service-description">
+                    Mantente informado sobre fechas clave, eventos y anuncios relevantes para tu vida académica.
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="service-title">Foros Interactivos</h3>
+                <p class="service-description">
+                    Participa en discusiones, resuelve dudas y comparte experiencias con otros estudiantes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="cta-section" id="contacto">
+        <h2 class="cta-title">¿Listo para mejorar tu experiencia estudiantil?</h2>
+        <p class="cta-description">
+            Únete hoy a Conexión Estudiantil y accede a todos los recursos que necesitas para tener éxito en la ENMS Guanajuato. Nuestra comunidad te está esperando.
+        </p>
+        <button class="cta-btn">Regístrate Gratis</button>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">Conexión Estudiantil</h3>
+                <p>
+                    Plataforma diseñada por estudiantes para estudiantes, con el objetivo de facilitar tu vida académica en la ENMS Guanajuato.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+                    <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                    <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sobre">Sobre Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Contacto</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> ENMS Guanajuato</li>
+                    <li><i class="fas fa-envelope"></i> conexionestudiantil@gmail.com</li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>
+                &copy; 2025 Conexión Estudiantil - ENMS Guanajuato. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Añadir FontAwesome para iconos
+        document.head.innerHTML += '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">';
+        
+        // Función para animar los elementos cuando son visibles
+        function checkScroll() {
+            const sections = document.querySelectorAll('.about-section, .services-section, .testimonials-section, .features-section, .stats-section, .cta-section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        // Animación de contadores para estadísticas
+        function animateStats() {
+            const statsSection = document.querySelector('.stats-section');
+            const sectionTop = statsSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (sectionTop < windowHeight * 0.75 && !statsSection.classList.contains('counted')) {
+                statsSection.classList.add('counted');
+                
+                // Valores finales para los contadores
+                const finalValues = {
+                    'users-count': 2500,
+                    'teachers-count': 120,
+                    'resources-count': 450,
+                    'groups-count': 85
+                };
+                
+                // Animación de contadores
+                Object.keys(finalValues).forEach(id => {
+                    const countElement = document.getElementById(id);
+                    const finalValue = finalValues[id];
+                    let currentValue = 0;
+                    const duration = 2000; // 2 segundos
+                    const increment = finalValue / (duration / 16);
+                    
+                    const timer = setInterval(() => {
+                        currentValue += increment;
+                        if (currentValue >= finalValue) {
+                            clearInterval(timer);
+                            currentValue = finalValue;
+                        }
+                        countElement.textContent = Math.floor(currentValue);
+                    }, 16);
+                });
+            }
+        }
+        
+        // Navegación móvil
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.querySelector('.close-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.add('active');
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+        
+        // Desplazamiento suave al hacer clic en enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Efecto parallax para el fondo
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.2 + (index * 0.1);
+                shape.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+        
+        // Animación al hacer scroll
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('scroll', animateStats);
+        
+        // Animación inicial al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            checkScroll();
+            
+            // Botón de desplazamiento hacia abajo
+            const scrollDown = document.querySelector('.scroll-down');
+            const aboutSection = document.querySelector('#sobre');
+            
+            scrollDown.addEventListener('click', () => {
+                window.scrollTo({
+                    top: aboutSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Añadir efecto de partículas al fondo del héroe
+            const heroSection = document.querySelector('.hero');
+            
+            // Crear 20 partículas aleatorias
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Estilos de partículas
+                particle.style.position = 'absolute';
+                particle.style.width = `${Math.random() * 10 + 3}px`;
+                particle.style.height = particle.style.width;
+                particle.style.background = 'rgba(255, 255, 255, 0.5)';
+                particle.style.borderRadius = '50%';
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animation = `float ${Math.random() * 6 + 4}s linear infinite`;
+                particle.style.opacity = Math.random();
+                
+                heroSection.appendChild(particle);
+            }
+            
+            // Efecto de revelación para elementos de título
+            const titleElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-description');
+            titleElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 300 * (index + 1));
+            });
+        });
+        
+        // Efecto de hover 3D para cards
+        const cards = document.querySelectorAll('.service-card, .feature-box, .testimonial-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenterX = cardRect.left + cardRect.width / 2;
+                const cardCenterY = cardRect.top + cardRect.height / 2;
+                const mouseX = e.clientX - cardCenterX;
+                const mouseY = e.clientY - cardCenterY;
+                
+                const rotateX = (mouseY / (cardRect.height / 2)) * -5;
+                const rotateY = (mouseX / (cardRect.width / 2)) * 5;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                card.style.transition = 'transform 0.5s ease';
+            });
+        });
+        
+        // Efecto de typing para el título principal
+        const heroTitle = document.querySelector('.hero-title');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let charIndex = 0;
+        const typingEffect = setInterval(() => {
+            if (charIndex < originalText.length) {
+                heroTitle.textContent += originalText.charAt(charIndex);
+                charIndex++;
+            } else {
+                clearInterval(typingEffect);
+                
+                // Añadir cursor parpadeante al final
+                const cursor = document.createElement('span');
+                cursor.textContent = '|';
+                cursor.style.animation = 'blink 1s infinite';
+                
+                // Añadir keyframes para el cursor
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes blink {
+                        0%, 100% { opacity: 1; }
+                        50% { opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                heroTitle.appendChild(cursor);
+                
+                // Quitar el cursor después de 3 segundos
+                setTimeout(() => {
+                    cursor.remove();
+                }, 3000);
+            }
+        }, 100);
+    </script>
+</body>
+</html>
